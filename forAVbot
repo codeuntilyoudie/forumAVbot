@@ -1,0 +1,20 @@
+#https://github.com/kennethreitz/requests/
+import re
+import requests
+
+def get_page(url):
+    r = requests.get(url)
+    content = r.text.encode('utf-8', 'ignore')
+    return content
+        
+        
+if __name__ == "__main__":
+    
+    url = 'http://forums.clamwin.com/viewforum.php?f=2'
+    page_content = get_page(url)
+    page_content = page_content.replace("\n", '')
+    
+    keyword = re.compile(r'Worm')
+    founditems = re.findall(keyword, page_content)   
+        
+    print founditems
